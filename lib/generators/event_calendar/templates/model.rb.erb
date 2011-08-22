@@ -1,6 +1,17 @@
 <% if defined? Mongoid %>
 class <%= model_class_name %>
   include Mongoid::Document
+  include Mongoid::Timestamps
+
+  field :name, :type => String
+  field :start_at, :type => DateTime
+  field :end_at, :type => DateTime
+  <%- if options[:use_all_day] -%>
+  field :all_day, :type => Boolean, :default => false
+  <%- end -%>
+  <%- if options[:use_color] -%>
+  field :color, :type => String
+  <%- end -%>
 <% else %>
 class <%= model_class_name %> < ActiveRecord::Base
 <% end %>
