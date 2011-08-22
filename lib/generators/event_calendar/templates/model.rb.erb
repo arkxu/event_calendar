@@ -1,3 +1,8 @@
+<% if defined? Mongoid %>
+class <%= model_class_name %>
+  include Mongoid::Document
+<% else %>
 class <%= model_class_name %> < ActiveRecord::Base
+<% end %>
   has_event_calendar
 end

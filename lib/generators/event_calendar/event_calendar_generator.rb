@@ -38,7 +38,9 @@ class EventCalendarGenerator < Rails::Generators::Base
       empty_directory "app/views/#{view_name}"
       template "view.html.erb", File.join("app/views/#{view_name}/index.html.erb")
       template "helper.rb.erb", "app/helpers/#{helper_name}.rb"
-      migration_template "migration.rb.erb", "db/migrate/create_#{table_name}.rb"
+      unless defined? Mongoid
+        migration_template "migration.rb.erb", "db/migrate/create_#{table_name}.rb"
+      end
       route "match '/#{view_name}(/:year(/:month))' => '#{view_name}#index', :as => :#{named_route_name}, :constraints => {:year => /\\d{4}/, :month => /\\d{1,2}/}"
     end
 
@@ -87,7 +89,7 @@ class EventCalendarGenerator < Rails::Generators::Base
   # FIXME: Should be proxied to ActiveRecord::Generators::Base
   # Implement the required interface for Rails::Generators::Migration.
   def self.next_migration_number(dirname) #:nodoc:
-    if ActiveRecord::Base.timestamped_migrations
+    if defined? Mongoid && ActiveRecord::Base.timestamped_migrations
       Time.now.utc.strftime("%Y%m%d%H%M%S")
     else
       "%.3d" % (current_migration_number(dirname) + 1)
