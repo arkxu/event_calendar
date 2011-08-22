@@ -89,7 +89,7 @@ class EventCalendarGenerator < Rails::Generators::Base
   # FIXME: Should be proxied to ActiveRecord::Generators::Base
   # Implement the required interface for Rails::Generators::Migration.
   def self.next_migration_number(dirname) #:nodoc:
-    if defined? Mongoid && ActiveRecord::Base.timestamped_migrations
+    if ActiveRecord::Base.timestamped_migrations
       Time.now.utc.strftime("%Y%m%d%H%M%S")
     else
       "%.3d" % (current_migration_number(dirname) + 1)
