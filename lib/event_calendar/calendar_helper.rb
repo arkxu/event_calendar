@@ -65,7 +65,7 @@ module EventCalendar
         # but they are needed to perform height calculations
         :width => nil,
         :height => 500,
-        :day_names_height => 18,
+        :day_names_height => 25,
         :day_nums_height => 18,
         :event_height => 18,
         :event_margin => 1,
