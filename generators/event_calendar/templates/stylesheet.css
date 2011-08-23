@@ -169,6 +169,10 @@ a.ec-day-link {
   white-space: nowrap;
 }
 
+.ec-event-bg {
+  background-color: #9aa4ad;
+}
+
 .ec-event :hover {
   /* doesn't look as good as js highlighting */
   /* background-color: #2eac6a; */

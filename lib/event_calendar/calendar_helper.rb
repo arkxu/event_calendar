@@ -213,7 +213,7 @@ module EventCalendar
 
                 cal << %(<td class="ec-event-cell" colspan="#{(dates[1]-dates[0]).to_i + 1}" )
                 cal << %(style="padding-top: #{options[:event_margin]}px;">)
-                cal << %(<div id="ec-#{class_name}-#{event.id}" class="ec-event )
+                cal << %(<div id="ec-#{class_name}-#{event.id}" class="ec-event ec-#{class_name}-#{event.id} )
                 if class_name != "event"
                   cal << %(ec-#{class_name} )
                 end
@@ -222,7 +222,7 @@ module EventCalendar
                   cal << %(style="color: #{event.color}; )
                 else
                   cal << %(ec-event-bg" )
-                  cal << %(style="background-color: #{event.color}; )
+                  #cal << %(style="background-color: #{event.color}; )
                 end
 
                 cal << %(padding-top: #{options[:event_padding_top]}px; )
@@ -341,7 +341,7 @@ module EventCalendar
         # if we reached the end of the week, calculate this row's height
         if index % 7 == 0
           total_event_height = options[:event_height] + options[:event_margin]
-          calc_row_height = (num_event_rows * total_event_height) + options[:day_nums_height] + options[:event_margin]
+          calc_row_height = ((num_event_rows+2) * total_event_height) + options[:day_nums_height] + options[:event_margin]
           row_height = [min_height, calc_row_height].max
           row_heights << row_height
           num_event_rows = 0
